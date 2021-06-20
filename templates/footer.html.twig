@@ -1,0 +1,35 @@
+<div class="margin-top-0"></div>
+
+<div id="footer">
+	<!-- Main -->
+	<div class="container">
+
+		<div class="seven columns">
+			<h4>About</h4>
+			<p>WorkScout is a web app to apply for a job</p>
+			{% if app.user %}
+			{% else %}
+			<a href="{{path('app_register')}}" class="button">Register now</a>
+			{% endif %}
+		</div>
+
+	<!-- Bottom -->
+	<div class="container">
+		<div class="footer-bottom">
+			<div class="sixteen columns">
+				<h4>Follow Us</h4>
+				<ul class="social-icons">
+					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
+				</ul>
+				<div class="copyrights">©  Copyright 2021 by <a href="#">Karoui Amin</a>&nbsp;&amp;&amp;&nbsp;<a href="#">Hamrouni Achref</a>. All Rights Reserved.</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>

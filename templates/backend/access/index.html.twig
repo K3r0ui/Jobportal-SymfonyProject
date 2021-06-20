@@ -1,0 +1,43 @@
+ {% extends 'backend/base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  {% include 'backend/navbar.html.twig' %}
+  <!-- Main Sidebar Container -->
+  {% include 'backend/sidebar.html.twig' %}             
+              <div class="card-body table-responsive p-0">
+              <a href="{{ path("backend_admin_ajout") }}" class="btn blue">Ajouter</a>
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Email</th>
+                      <th>Roles</th>
+                      <th>Access</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for admins in admin|slice(1,1) %} 
+                    <tr>
+                      <td>{{admins.id}}</td>
+                      <td>{{admins.email}}</td>
+                      <td>{% for item in admins.roles %}{{item}}{% endfor %}</td>
+                      <td>{% if admins.full == true %} Full Access {% elseif admins.moderator == true %} Some Access {% elseif admins.full == true and admins.moderator == true %} Full Access {% else %} No Access Defined {% endif %}</td>
+                       
+                    
+                    <td><a href="/backend/access/modifier/{{admins.id}}" class="btn blue">Modifier</a>
+                    
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+{% endblock %}

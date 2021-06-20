@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include 'header.html.twig' %}
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="photo-bg" style="background-image: url(images/all-categories-photo.jpg);">
+	<div class="container">
+		<div class="ten columns">
+			<h2>All Categories</h2>
+		</div>
+
+		<div class="six columns">
+			<a href="add-job.html" class="button">Post a Job, It’s Free!</a>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+<div id="categories">
+	<!-- Categories Group -->
+	<div class="categories-group">
+		<div class="container">
+			<div class="four columns">
+				<ul>
+                    {% for categorie in categories %}
+					<li><a href="{{categorie.url}}"><h4 style="color:green;">{{categorie.nom}}</h4></a></li>
+                    {% endfor %}
+				</ul>
+			</div>
+			
+		</div>
+	</div>
+
+</div>
+{% include 'footer.html.twig' %}
+</div>
+<!-- Wrapper / End -->
+{% endblock %}
+

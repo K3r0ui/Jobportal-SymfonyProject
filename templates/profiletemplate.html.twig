@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/css/axentix.min.css"> {% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="#">
+	</head>
+	<body class="layout with-sidenav">
+		<header>
+			<nav class="navbar primary">
+				<a href="{{ path('index') }}" class="navbar-brand">Profile</a>
+				<div class="navbar-menu ml-auto">
+					<a class="navbar-link" href="#">Mob Profile</a>
+					<a class="navbar-link" href="#">#</a>
+
+				</div>
+			</nav>
+		</header>
+		<div id="example-sidenav" class="sidenav large fixed white">
+			<div class="sidenav-header">
+				<button data-target="example-sidenav" class="sidenav-trigger">
+					<i class="fas fa-times"></i>
+				</button>
+				<img class="logo dropshadow-1" src="your_img_path" alt="Logo"/>
+			</div>
+			<a href="#" class="sidenav-link active">Mon profil</a>
+		</div>
+		<main>
+			{% block body %}{% endblock %}
+		</main>
+
+		<footer class="footer primary">
+			Copyright © 2021
+		</footer>
+
+
+		<script src="https://cdn.jsdelivr.net/npm/axentix@0.5.3/dist/js/axentix.min.js"></script>
+		{% block javascripts %}{% endblock %}
+		<script>
+			var sidenav = new Sidenav('#example-sidenav');
+		</script>
+		<script src="#"></script>
+	</body>
+</html>

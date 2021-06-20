@@ -1,0 +1,62 @@
+ {% extends 'backend/base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  {% include 'backend/navbar.html.twig' %}
+  <!-- Main Sidebar Container -->
+  {% include 'backend/sidebar.html.twig' %} 
+  <h3> Prune Condidates </h3>            
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Full Name</th>
+                      <th>Email</th>
+                      <th>Roles</th>
+                      <th>Mobile</th>
+                      <th>Profile Image</th>
+                      <th>Status</th>
+                      <th>Creation date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for condidats in condidat %}
+                    <tr>
+                      <td>{{condidats.id}}</td>
+                      <td>{{condidats.nom}} {{condidats.prenom}}</td>
+                      <td>{{condidats.email}}</td>
+                      <td>{% for item in condidats.roles %}{{item}}{% endfor %}</td>
+                      <td>{{condidats.mobile}}</td>
+                      <td><img width="40" height="40" src="/uploads/condidat/pdp/{{condidats.profileimage}}"/></td>
+                      <td>{% if condidats.enabled == 1 %} Verified {% else %} Not Verified {% endif %}</td>
+                      <td>{% set diff = condidats.createdat|date('Y-m-d') < "now"|date('Y-m-d') %}
+                          {% if diff %} Account passed 24h for verifying 
+                          {% else %}
+                          Account still new
+                          {% endif %}
+                      
+                       </td>
+                      <td>
+                     
+
+                     
+                      
+                       <a href="/backend/condidat/delete/{{condidats.id}}" class="btn red " onclick="return confirm('Attention ce ci va supprimer l\administratuer')">Supprimer</a>
+                      
+                      
+                    </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+ {% extends 'backend/base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  {% include 'backend/navbar.html.twig' %}
+  <!-- Main Sidebar Container -->
+  {% include 'backend/sidebar.html.twig' %}             
+              <div class="card-body table-responsive p-0">
+              <a href="{{ path("backend_admin_ajout") }}" class="btn blue">Ajouter</a>
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Nom</th>
+                      <th>Attempts</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for params in param %} 
+                    <tr>
+                    {% if params.nom == "tentativecondidat" %}
+                      <td>Les Tentatives du Condidat par jour</td>
+                      <td>{{params.Attempts}}</td>
+                    {% else %}
+                      <td>{{params.nom}}</td>
+                      <td>{{params.Attempts}}</td>
+                    {% endif %}
+                    
+                    <td><a href="/backend/parametre/modifier/{{params.nom}}" class="btn blue">Modifier</a>
+                    <a href="/backend/parametre/delete/{{params.nom}}" class="btn red " onclick="return confirm('Attention ce ci va supprimer Le Parametre')">Supprimer</a>
+                    
+                    </td>
+                    
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+{% endblock %}

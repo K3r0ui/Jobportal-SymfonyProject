@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include 'header.html.twig' %}
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="single">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2>My Account</h2>
+			<nav id="breadcrumbs">
+				<ul>
+					<li>You are here:</li>
+					<li><a href="#">Home</a></li>
+					<li>My Account</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+
+<!-- Container -->
+<div class="container">
+
+	<div class="my-account">
+		<div class="tabs-container">
+
+				<!-- Register -->
+				<div class="tab-content" id="tab2" style="display: none;">
+                    {% if app.user %}
+                    <h3 class="margin-bottom-10 margin-top-10">You Cannot Access This Page</h3>
+            
+					{% else %}
+					<h3 class="margin-bottom-10 margin-top-10">Register</h3>
+                    {% for flashError in app.flashes('verify_email_error') %}
+                     <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+					{% endfor %}
+					{{ form_start(registrationForm) }}
+						
+                        <p class="form-row form-row-wide">
+							{{ form_row(registrationForm.nom,{'label' : 'Nom :'  }) }}
+						</p>
+
+						<p class="form-row form-row-wide">
+							{{ form_row(registrationForm.prenom,{'label' : 'Prénom :'  }) }}
+						</p>
+
+						<p class="form-row form-row-wide">
+							{{ form_row(registrationForm.email,{'label' : 'Mail Address :'  }) }}
+						</p>
+
+						
+						<p class="form-row form-row-wide">
+							{{ form_row(registrationForm.plainPassword) }}
+						</p>
+
+						<p class="form-row form-row-wide">
+							{{ form_row(registrationForm.ddnaissance, {'label' : 'Date de naissance :'  }) }}
+						</p>
+
+						<p class="form-row form-row-wide">
+							{{ form_row(registrationForm.mobile, {'label' : 'Mobile :'  }) }}
+						</p>
+
+						<p class="form-row form-row-wide">
+							{{ form_row(registrationForm.cvimage, {'label' : 'Curriculum vitae :'  }) }}
+						</p>
+
+						<p class="form-row form-row-wide">
+							{{ form_row(registrationForm.profileimage, {'label' : 'Photo de profile :'  }) }}
+						</p>
+									
+						<p class="form-row">
+							<input type="submit" class="button" name="register" value="Register" />
+						</p>
+						
+						<p class="form-row form-row-wide">
+							{{ form_row(registrationForm.agreeTerms, {'label' : 'Agree Terms :'  }) }}
+						</p>
+					{{ form_end(registrationForm) }}
+					{% endif %}
+				</div>
+		</div>
+	</div>
+</div>
+
+{% include 'footer.html.twig' %}
+</div>
+<!-- Wrapper / End -->
+
+
+<!-- Scripts
+   <! <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+        $('.js-datepicker').datepicker({
+            format:'yyyy.MM.dd',
+            maxDate:'-18y',
+            minDate:'-60y'
+        });
+</script> -->
+{% endblock %}

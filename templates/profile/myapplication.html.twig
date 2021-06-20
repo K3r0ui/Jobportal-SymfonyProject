@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% if app.user %}Profile : {{ app.user.nom }} {{ app.user.prenom }}{% endif %}{% endblock %}
+
+{% block body %}
+
+{% include 'header.html.twig' %}
+{% if app.user %}
+<div class="container">
+	
+	<!-- Table -->
+
+
+	<div class="eight columns">
+		<!-- Select -->
+		<select data-placeholder="Filter by status" class="chosen-select-no-single">
+			<option value="">Filter by status</option>
+			<option value="new">New</option>
+			<option value="interviewed">Interviewed</option>
+			<option value="offer">Offer extended</option>
+			<option value="hired">Hired</option>
+			<option value="archived">Archived</option>
+		</select>
+		<div class="margin-bottom-15"></div>
+	</div>
+
+	<div class="eight columns">
+		<!-- Select -->
+		<select data-placeholder="Newest first" class="chosen-select-no-single">
+			<option value="">Newest first</option>
+			<option value="name">Sort by name</option>
+			<option value="rating">Sort by rating</option>
+		</select>
+		<div class="margin-bottom-35"></div>
+	</div>
+
+
+	<!-- Applications -->
+	<div class="sixteen columns">
+		
+		<!-- Application #1 -->
+		<div class="application">
+        {% for myapplications in myapplication %}
+			<div class="app-content">
+				
+				<!-- Name / Avatar -->
+				<div class="info">
+					<img src="/uploads/images/employeurimage/{{myapplications.oemploi.employeurimage}}" alt="">
+					<span>{{myapplications.oemploi}}</span>
+					<ul>
+						<li><a href="/uploads/condidat/cv/{{myapplications.idcondidat.cvimage}}" download><i class="fa fa-file-text"></i> Download CV</a></li>
+                        <li><a href="/uploads/condidat/cv/{{myapplications.idcondidat.cvimage}}" ><i class="fa fa-file-text"></i> View Your CV</a></li>
+					</ul>
+				</div>
+				
+				<!-- Buttons -->
+				<div class="buttons">
+					<a href="#small-dialog{{myapplications.id}}" class="popup-with-zoom-anim button"> Show Details</a>
+                    <div id="small-dialog{{myapplications.id}}" class="zoom-anim-dialog mfp-hide apply-popup">
+
+					<div class="small-dialog-headline">
+						<h2>Informations about the application</h2>
+					</div>
+                    
+					<div class="small-dialog-content">
+                            <input type="text" style="color:green" value="Application status:"/>
+							<input type="text"   value="{{myapplications.etat}}"  readonly/>
+                            <input type="text" style="color:green" value="Application date:"/>
+							<input type="text"   value="{{myapplications.date | date('d-m-Y')}}"  readonly/>
+                            {% for rdvs in rdv %}
+                            {% if rdvs.demploi.id == myapplications.id %}
+                            
+                            <input type="text" style="color:green" value="Interview Date:"/>
+							<input type="text"   value="{{rdvs.date | date('d-m-Y')}}"  readonly/>
+                            {% endif %}
+                            {% endfor %}
+
+					</div>
+				</div>
+				</div>
+				<div class="clearfix"></div>
+
+			</div>
+        {% endfor %}
+
+		</div>
+        
+{% else %}
+<div id="titlebar" class="single submit-page">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2><i class="fa fa-plus-circle"></i> Manage Profile/ My Application</h2>
+		</div>
+
+	</div>
+</div>
+<div class="container">
+	
+	<!-- Submit Page -->
+	<div class="sixteen columns">
+      <h3> You have to login first to access this page </h3>
+	</div>
+
+</div>
+{% endif %}
+{% include 'footer.html.twig' %}
+</div>
+<!-- Wrapper / End -->
+{% endblock %}

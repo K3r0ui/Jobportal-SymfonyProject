@@ -1,0 +1,46 @@
+ {% extends 'backend/base.html.twig' %}
+{% block body %}
+<div class="wrapper">
+  {% include 'backend/navbar.html.twig' %}
+  <!-- Main Sidebar Container -->
+  {% include 'backend/sidebar.html.twig' %}             
+              <div class="card-body table-responsive p-0">
+              <a href="{{ path("backend_admin_ajout") }}" class="btn blue">Ajouter</a>
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Email</th>
+                      <th>Roles</th>
+                      <th>Mobile</th>
+                      <th>Profile Image</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for admins in admin|slice(1,1) %} 
+                    <tr>
+                      <td>{{admins.id}}</td>
+                      <td>{{admins.email}}</td>
+                      <td>{% for item in admins.roles %}{{item}}{% endfor %}</td>
+                      <td>{{admins.mobile}}</td>
+                      <td><img width="40" height="40" src="{{asset('uploads/admin/pdp/')}}{{admins.profileimage}}"/></td>
+                      <td><a href="/backend/admin/modifier/{{admins.id}}" class="btn blue">Modifier</a>
+                    <a href="/backend/admin/delete/{{admins.id}}" class="btn red " onclick="return confirm('Attention ce ci va supprimer l\administratuer')">Supprimer</a>
+                    
+                    </td>
+                    
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+{% endblock %}

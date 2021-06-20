@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add or Edit Parametre{% endblock %}
+
+{% block body %}
+    <h1>Add Or Edit Parametre</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.nom ,{'label' : 'Name of parametre :'  })}}
+    
+    {{ form_row(form.attempts ,{'attr': {'min': 2}}  )}}
+    {{ form_end(form) }}
+{% endblock %}

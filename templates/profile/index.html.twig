@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% if app.user %}Profile : {{ app.user.nom }} {{ app.user.prenom }}{% endif %}{% endblock %}
+{% block body %}
+{% include 'header.html.twig' %}
+{% if app.user %}
+<div id="titlebar" class="single submit-page">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2><i class="fa fa-plus-circle"></i> Manage Profile</h2>
+
+		</div>
+
+	</div>
+</div>
+<div class="container">
+	{% for message in app.flashes('message') %}
+	<h3 style="color:red;">{{message}}</h3>
+	{% endfor %}
+	<!-- Submit Page -->
+	<div class="sixteen columns">
+		<div class="submit-page">
+			<!-- Email -->
+			<div class="form">
+				<h5>Profile Image</h5>
+				<input type="button" value="Show Button" onclick="showImage();"/>
+				<img id="loadingImage" width="100px" height="100px" src="\uploads\condidat\pdp\{{ app.user.profileimage }}" style="visibility:hidden" />
+			</div>
+			<div class="form">
+				<h5>Your Name</h5>
+				<input class="search-field" type="text" value="{{ app.user.nom }} {{ app.user.prenom }}" readonly/>
+			</div>
+
+			<!-- Email -->
+			<div class="form">
+				<h5>Your Email</h5>
+				<input class="search-field" type="text" value="{{ app.user.email }}" readonly/>
+			</div>
+
+			<!-- Title -->
+			<div class="form">
+				<h5>Date de naissance</h5>
+				<input class="search-field" type="text" placeholder="e.g. Web Developer" value="{{ app.user.ddnaissance|date('d-m-Y') }}" readonly/>
+			</div>
+
+			<!-- Location -->
+			<div class="form">
+			    {% if app.user.enabled == 0 %}
+				<h5>Status</h5>
+				<input class="search-field" type="text" value="Not Verified" readonly/>
+				<a href="/confirmermoncpt/{{app.user.token}}"> Verify to prevent deletion </a>
+				{% else %}
+				<h5>Status</h5>
+				<input class="search-field" type="text" value="Verified" readonly/>
+				{% endif %}
+			</div>
+
+			<!-- Logo -->
+			<div class="form">
+				<h5>Curriculum Vitae</h5>
+				    <img src="\uploads\condidat\cv\{{ app.user.cvimage }}" width="700" height="700"/>
+			</div>
+
+			<div class="divider margin-top-0 padding-reset"></div>
+			<a href="{{path('profile_condidat_modif')}}" class="button big margin-top-5">Profile Settings <i class="fa fa-arrow-circle-right"></i></a>
+			<a href="{{path('profile_condidat_modif_pass')}}" class="button big margin-top-5">Password Settings <i class="fa fa-arrow-circle-right"></i></a>
+			<a href="{{path('myapplication')}}" class="button big margin-top-5">My Applications <i class="fa fa-arrow-circle-right"></i></a>
+
+		</div>
+	</div>
+
+</div>
+{% else %}
+<div id="titlebar" class="single submit-page">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2><i class="fa fa-plus-circle"></i> Manage Profile</h2>
+		</div>
+
+	</div>
+</div>
+<div class="container">
+	
+	<!-- Submit Page -->
+	<div class="sixteen columns">
+      <h3> You have to login first to access this page </h3>
+	</div>
+
+</div>
+{% endif %}
+{% include 'footer.html.twig' %}
+</div>
+<!-- Wrapper / End -->
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+function showImage(){
+        document.getElementById('loadingImage').style.visibility="visible";
+    }
+</script>
+{% endblock %}

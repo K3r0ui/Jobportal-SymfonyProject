@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include 'header.html.twig'%}
+<div id="titlebar" class="single">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2>Reset My Account</h2>
+			<nav id="breadcrumbs">
+				<ul>
+					<li>You are here:</li>
+					<li><a href="{{path('index')}}">Home</a></li>
+					<li>Reset Password</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+</div>
+
+<h1 class="h3 mb-3 font-weight-normal">Reset Password</h1>
+{{ form(emailForm)}}
+{% include 'footer.html.twig' %}
+<!-- Footer
+================================================== -->
+
+</div>
+{% endblock %}

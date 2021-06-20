@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include 'header.html.twig'%}
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="single">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2>My Account</h2>
+			<nav id="breadcrumbs">
+				<ul>
+					<li>You are here:</li>
+					<li><a href="{{path('index')}}">Home</a></li>
+					<li>My Account</li>
+				</ul>
+			</nav>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+
+<!-- Container -->
+<div class="container">
+
+	<div class="my-account">
+
+		<div class="tabs-container">
+			<!-- Login -->
+			<div class="tab-content" id="tab1" style="display: none;">
+                {% if app.user %}
+				<h3 class="margin-bottom-10 margin-top-10">My Account</h3>
+				{% else %}
+				<h3 class="margin-bottom-10 margin-top-10">Login</h3>
+				{% endif %}
+                {% if app.user %}
+                        <div class="mb-3">
+                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+				{% else %}
+				<form method="post" class="login">
+
+					    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                       
+                        
+					<p class="form-row form-row-wide">
+						<label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+					</p>
+
+					<p class="form-row form-row-wide">
+						<label for="inputPassword">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+					</p>
+                    
+                     <input type="hidden" name="_csrf_token"
+                      value="{{ csrf_token('authenticate') }}"
+                     />
+					<p class="form-row">
+						<button type="submit">Login </button>
+
+					<!--!	<label for="rememberme" class="rememberme">
+						<input name="_remember_me" type="checkbox" id="_remember_me" value="forever" /> Remember Me</label>
+					</p> -->
+
+					<p class="lost_password">
+						<a href="{{path('app_resetpassword')}}" >Lost Your Password?</a>
+					</p>
+
+					
+				</form>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% include 'footer.html.twig' %}
+<!-- Footer
+================================================== -->
+
+</div>
+
+{% endblock %}

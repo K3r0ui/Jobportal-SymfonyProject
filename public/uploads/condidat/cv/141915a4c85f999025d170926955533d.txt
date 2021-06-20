@@ -1,0 +1,29 @@
+php bin/console doctrine:schema:update --force
+
+symfony proxy:start ( start un proxy ) 
+symfony proxy:domain:attach nameofproject
+-> Http://nameofproject.wip
+( il faut ajouter une autre configuration ) -- Modif proxy sous windows et ajouter l'adresse du proxy 127.0.0.1:7080/proxy.pac
+
+
+
+Set-ExecutionPolicy RemoteSigned
+yarn install
+yarn add sass-loader node-sass --dev
+./node_modules/.bin/encore dev
+
+
+composer require symfony/orm-pack
+composer require --dev symfony/maker-bundle
+
+creer une entite : 
+php bin/console make:entity nameofentity
+
+creation de la base de donnée : 
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:update -–force
+
+ajouter une autre chose et update the database : 
+php bin/console make:migration
+pour l'appliquer dans la database : 
+php bin/console doctrine:migrations:migrate

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% if app.user %}Profile : {{ app.user.nom }} {{ app.user.prenom }}{% endif %}{% endblock %}
+
+{% block body %}
+
+{% include 'header.html.twig' %}
+{% if app.user %}
+<div id="titlebar" class="single submit-page">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2><i class="fa fa-plus-circle"></i> Manage Profile/Edit Profile</h2>
+            	{% for message in app.flashes('message') %}
+	            <h4>{{message}}</h4>
+	            {% endfor %}
+		</div>
+
+	</div>
+</div>
+<div class="container">
+
+	<!-- Submit Page -->
+	<div class="sixteen columns">
+		<div class="submit-page">
+		{{ form_start(form)}}
+			<!-- Email -->
+			<div class="form">
+				{{ form_row(form.nom)}}
+			</div>
+
+			<!-- Email -->
+			<div class="form">
+				{{ form_row(form.prenom)}}
+			</div>
+
+			<!-- Title -->
+			<div class="form">
+				{{ form_row(form.ddnaissance)}}
+			</div>
+
+			<!-- Location -->
+			<div class="form">
+			    {{ form_row(form.mobile)}}
+			</div>
+			{{ form_row(form.submit)}}
+			<div class="divider margin-top-0 padding-reset"></div>
+			<a href="{{path('profile_condidat_modif_pdp')}}" class="button big margin-top-5">Profile Picture Settings <i class="fa fa-arrow-circle-right"></i></a>
+			<a href="{{path('profile_condidat_modif_cv')}}" class="button big margin-top-5">CV Settings <i class="fa fa-arrow-circle-right"></i></a>
+			<a href="{{path('profile')}}" class="button big margin-top-5">Back To Manage Profile <i class="fa fa-arrow-circle-right"></i></a>
+			
+        {{ form_end(form)}}
+		</div>
+	</div>
+
+</div>
+{% else %}
+<div id="titlebar" class="single submit-page">
+	<div class="container">
+
+		<div class="sixteen columns">
+			<h2><i class="fa fa-plus-circle"></i> Manage Profile</h2>
+		</div>
+
+	</div>
+</div>
+<div class="container">
+	
+	<!-- Submit Page -->
+	<div class="sixteen columns">
+      <h3> You have to login first to access this page </h3>
+	</div>
+
+</div>
+{% endif %}
+
+{% include 'footer.html.twig' %}
+</div>
+<!-- Wrapper / End -->
+{% endblock %}
